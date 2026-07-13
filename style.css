@@ -808,8 +808,7 @@ section h2{
     margin-top:25px;
 }
 
-.download-btn,
-.close-btn{
+.download-btn,.close-btn{
     flex:1;
     height:65px;
     border:none;
