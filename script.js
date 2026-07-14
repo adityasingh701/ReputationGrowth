@@ -2,6 +2,8 @@
 // REPUTATION GROWTH - SCRIPT.JS
 // ================================
 
+let currentReceiptId = "";
+
 const orderForm = document.getElementById("orderForm");
 const orderIdInput = document.getElementById("orderId");
 
@@ -140,8 +142,8 @@ function calculatePrice() {
 
     // Google Maps
     if (platform === "map") {
-        if (wishType === "1") rate = 30;
-        if (wishType === "2") rate = 35;
+        if (wishType === "1") rate = 25;
+        if (wishType === "2") rate = 30;
         
     }
 
@@ -154,8 +156,8 @@ function calculatePrice() {
 
     // Justdial
     if (platform === "justdial") {
-        if (wishType === "1") rate = 30;
-        if (wishType === "2") rate = 35;
+        if (wishType === "1") rate = 25;
+        if (wishType === "2") rate = 30;
         
     }
 
@@ -187,8 +189,8 @@ orderForm.addEventListener("submit", async function (e) {
 
     const wishType =
     wishTypeSelect.value === "1"
-        ? "1 Line"
-        : "2 Line";
+        ? "2-3 Lines"
+        : "4-5 Lines";
     
 
     const quantity =
@@ -274,6 +276,7 @@ document.getElementById(
     Our team will contact you on WhatsApp shortly.
 `;
 
+        currentReceiptId = formData.orderId;
         document.getElementById(
             "successModal"
         ).style.display = "flex";
@@ -285,13 +288,14 @@ document.getElementById(
         customBox.classList.add("hidden");
 
         discountPercent = 0;
-        couponApplied = false;
+couponApplied = false;
 
-        couponInput.value = "";
-        couponMessage.innerHTML = "";
+couponInput.value = "";
+couponMessage.innerHTML = "";
 
-        orderIdInput.value =
-            generateOrderId();
+calculatePrice();
+
+orderIdInput.value = generateOrderId();
 
     }
 
@@ -362,8 +366,7 @@ function downloadReceipt(){
         const link =
             document.createElement("a");
 
-        link.download =
-            `${orderIdInput.value}.png`;
+        link.download = `${currentReceiptId}.png`;
 
         link.href =
             canvas.toDataURL(
