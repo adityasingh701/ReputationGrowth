@@ -791,6 +791,7 @@ section h2{
 
 
 .faq-item.active .faq-answer{
+  display:flex;
     max-height:200px;
     padding:0 28px 25px;
 }
